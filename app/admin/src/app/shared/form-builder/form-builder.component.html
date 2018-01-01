@@ -1,0 +1,72 @@
+<form #blocksForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate class="form-horizontal">
+    <div class="form-group" *ngFor="let fieldSettings of settings.fields; let i = index;" [ngClass]="[fieldSettings.type]">
+        <ff-text 
+                [settings]="fieldSettings" 
+                [group]="form.controls[fieldSettings.name]" 
+                [controlName]="fieldSettings.name" 
+                (dataUpdated)="onDataUpdated($event, fieldSettings.name)" 
+                *ngIf="fieldSettings.type == 'text'"></ff-text>
+        
+        <ff-textarea 
+                [settings]="fieldSettings" 
+                [group]="form.controls[fieldSettings.name]" 
+                [controlName]="fieldSettings.name" 
+                (dataUpdated)="onDataUpdated($event, fieldSettings.name)" 
+                *ngIf="fieldSettings.type == 'textarea'"></ff-textarea>
+        
+        <ff-image-upload 
+                [settings]="fieldSettings" 
+                [group]="form.controls[fieldSettings.name]" 
+                [controlName]="fieldSettings.name" 
+                (dataUpdated)="onDataUpdated($event, fieldSettings.name)" 
+                [data]="getValue(fieldSettings.name)"
+                *ngIf="fieldSettings.type == 'image'"></ff-image-upload>
+
+        <ff-select
+                [settings]="fieldSettings"
+                [group]="form.controls[fieldSettings.name]"
+                [controlName]="fieldSettings.name"
+                (dataUpdated)="onDataUpdated($event, fieldSettings.name)"
+                *ngIf="fieldSettings.type == 'select'"></ff-select>
+
+        <ff-repeater
+                [settings]="fieldSettings"
+                [formArrayName]="fieldSettings.name"
+                [group]="form.controls[fieldSettings.name]"
+                [controlName]="fieldSettings.name"
+                [data]="getValue(fieldSettings.name)"
+                (dataUpdated)="onDataUpdated($event, fieldSettings.name)"
+                *ngIf="fieldSettings.type == 'repeater'"></ff-repeater>
+
+        <ff-date-picker
+                [settings]="fieldSettings"
+                [group]="form.controls[fieldSettings.name]"
+                [controlName]="fieldSettings.name"
+                [data]="getValue(fieldSettings.name)"
+                (dataUpdated)="onDataUpdated($event, fieldSettings.name)" 
+                *ngIf="fieldSettings.type == 'date'"></ff-date-picker>
+        
+        <ff-checkbox 
+                [settings]="fieldSettings" 
+                [group]="form.controls[fieldSettings.name]" 
+                [controlName]="fieldSettings.name" 
+                (dataUpdated)="onDataUpdated($event, fieldSettings.name)" 
+                *ngIf="fieldSettings.type == 'checkbox'"></ff-checkbox>
+
+        <ff-video-select
+                [settings]="fieldSettings"
+                [group]="form.controls[fieldSettings.name]"
+                [controlName]="fieldSettings.name"
+                (dataUpdated)="onDataUpdated($event, fieldSettings.name)"
+                *ngIf="fieldSettings.type == 'video-select'"></ff-video-select>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-sm-3 col-sm-9">
+            <button [disabled]="form?.invalid" class="btn btn-warning" type="submit">Отправить</button>
+        </div>
+    </div>
+</form>
+
+<!--<pre class="clear-fix">{{ settings | json }}</pre>-->
+<!--<pre class="clear-fix">{{ data | json }}</pre>-->

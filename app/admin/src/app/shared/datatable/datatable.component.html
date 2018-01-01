@@ -1,0 +1,44 @@
+<ba-card title="{{settings.title}}">
+    <p class="align-right">
+        <button class="btn btn-success" (click)="onCreateEvent()" *ngIf="settings.actions.add">Добавить запись</button>
+        <button class="btn btn-success" (click)="onExportEvent()" *ngIf="settings.actions.export">Экспорт в .xls</button>
+    </p>
+
+    <div class="datatable-container">
+        <div class="loading-spinner" #loadingSpinner>Загрузка...</div>
+
+        <table #table class="table datatable" cellspacing="0" width="100%">
+            <thead>
+            <tr class="datatable-titles">
+                <th *ngFor="let columnSettings of settings.columns; let i = index;">
+                    {{ columnSettings.label }}
+                </th>
+                <th>Действия</th>
+            </tr>
+
+            <tr class="datatable-filters" *ngIf="settings.filters">
+                <th *ngFor="let columnSettings of settings.columns; let i = index;">
+                    <input type="text" class="form-control" *ngIf="columnSettings.filter && columnSettings.filter.type == 'text'" [(ngModel)]="dataTableFilterParams[columnSettings.name]">
+
+                    <date-time-picker *ngIf="columnSettings.filter && columnSettings.filter.type == 'date'" [(ngModel)]="dataTableFilterParams[columnSettings.name]"></date-time-picker>
+
+                    <select class="form-control" *ngIf="columnSettings.filter && columnSettings.filter.type == 'list'" [(ngModel)]="dataTableFilterParams[columnSettings.name]">
+                        <option *ngFor="let option of columnSettings.filter.options; let i = index;" [ngValue]="option.value">
+                            {{ option.title }}
+                        </option>
+                    </select>
+                </th>
+
+                <th class="controls-cell" rowspan="1" colspan="1">
+                    <button class="btn btn-sm btn-success filter-submit" (click)="submitFilter()"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-sm btn-default filter-cancel" (click)="resetFilter()"><i class="fa fa-times"></i></button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</ba-card>
+
+<!--<pre class="clear-fix">{{ dataTableFilterParams | json }}</pre>-->

@@ -1,0 +1,28 @@
+@import '../../theme/sass/conf/conf';
+
+.form-control[readonly].flatpickr-input {
+  color: #666666; border: 1px solid #cbcbcb;
+}
+
+form {
+  .form-control-label {
+    line-height: 1.2;
+    align-self: center;
+  }
+
+  .has-success .form-control-label {
+    color: #5cb85c;
+  }
+
+  .has-success .form-control[readonly].flatpickr-input {
+    border: 1px solid #a6c733;
+  }
+
+  .has-error .form-control-label {
+    color: #e85656;
+  }
+
+  .has-error .form-control[readonly].flatpickr-input {
+    border: 1px solid #ed7878;
+  }
+}

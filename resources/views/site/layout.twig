@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="{{ asset("site/css/normalize.css") }}" rel="stylesheet" />
+    <link href="{{ asset("site/css/font-awesome.min.css") }}" rel="stylesheet" />
+    <link href="{{ asset("site/css/jquery.modalBox.css") }}" rel="stylesheet" />
+    <link href="{{ asset("site/css/animate.css") }}" rel="stylesheet" />
+    <link href="{{ asset("site/css/slick.css") }}" rel="stylesheet" />
+    <link href="{{ asset("site/css/cropper.min.css") }}" rel="stylesheet" />
+    <link href="{{ asset("site/css/bootstrap-datepicker.min.css") }}" rel="stylesheet" />
+    <link href="{{ asset("site/css/jquery.jscrollpane.css") }}" rel="stylesheet" />
+
+    <link href="{{ asset("site/css/main.css?" ~ v) }}" rel="stylesheet" />
+</head>
+
+<body class="{{ view_name }}">
+
+{% include "site.partials.modals" %}
+
+<header>
+
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<script>
+    var baseUrl = '{{ url("/") }}/';
+    var user = false;
+    var loginStatus = '{{ loginStatus }}';
+
+    {% if user %}
+    user = {
+        uid: '{{ user.uid }}',
+        email: '{{ user.email }}'
+    };
+    {% endif %}
+</script>
+
+<script src="{{ asset("site/js/vendors/jquery-2.1.0.min.js") }}"></script>
+<script src="{{ asset("site/js/vendors/jquery.imgpreload.min.js") }}"></script>
+<script src="{{ asset("site/js/vendors/jquery.preloader.js") }}"></script>
+<script src="{{ asset("site/js/vendors/jquery.actual.min.js") }}"></script>
+<script src="{{ asset("site/js/vendors/jquery.modalBox.js") }}"></script>
+<script src="{{ asset("site/js/vendors/jquery.validate.min.js") }}"></script>
+<script src="{{ asset("site/js/vendors/jquery.inputmask.bundle.js") }}"></script>
+<script src="{{ asset("site/js/vendors/js.cookie.js") }}"></script>
+<script src="{{ asset("site/js/vendors/mwheelIntent.js") }}"></script>
+<script src="{{ asset("site/js/vendors/jquery.mousewheel.js") }}"></script>
+<script src="{{ asset("site/js/vendors/jquery.jscrollpane.min.js") }}"></script>
+<script src="{{ asset("site/js/vendors/cropper.min.js") }}"></script>
+
+<script src="{{ asset("site/js/main.js?" ~ v) }}"></script>
+
+<!--[if lt IE 9]><script src="js/vendors/html5shiv.js"></script><![endif]-->
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

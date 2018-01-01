@@ -1,0 +1,13 @@
+<ba-card title="Загрузка телепрограммы на сервер">
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit($event, form)">
+        <div class="form-group row">
+            <label for="file" class="col-sm-4 form-control-label">Выберите .csv файл</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="file" name="file" id="file" accept=".csv">
+            </div>
+        </div>
+        <button class="btn btn-danger" type="submit">Отправить</button>
+    </form>
+</ba-card>
+
+<datatable [settings]="dataTableSettings" #dataTable></datatable>

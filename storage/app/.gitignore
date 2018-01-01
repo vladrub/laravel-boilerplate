@@ -1,0 +1,4 @@
+*
+!public/
+!local/
+!.gitignore

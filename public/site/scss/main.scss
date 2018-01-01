@@ -1,0 +1,33 @@
+@import 'compass';
+@import 'mixins/_fonts';
+@import 'mixins/_variables';
+@import 'mixins/_mixins';
+@import 'mixins/_grids';
+@import 'mixins/_typography';
+@import '_functions';
+@import 'modules/preloader';
+
+html, body { height: 100% }
+
+html {
+  font-size: calc( 100vw / 120 );
+}
+
+.clear-fix {
+  @include susy-clearfix;
+}
+
+* {
+  outline: none;
+}
+
+.icon {
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+
+  //&.vk { @include bg('icons/vk.png', true); }
+  //&.fb { @include bg('icons/fb.png', true); }
+  //&.ok { @include bg('icons/ok.png', true); }
+}

@@ -1,0 +1,22 @@
+<ba-card title="Информация о пользователе">
+    <table class="table table-bordered" *ngIf="formData">
+        <tr>
+            <td>Id #</td>
+            <td>{{ formData._id }}</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>{{ formData.email }}</td>
+        </tr>
+        <tr>
+            <td>Права</td>
+            <td>
+                <span *ngIf="formData.role == 0">Пользователь</span>
+                <span *ngIf="formData.role == 1">Суперюзер</span>
+            </td>
+        </tr>
+    </table>
+
+</ba-card>
+
+<!--<pre class="clear-fix">{{ formData | json }}</pre>-->

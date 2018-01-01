@@ -1,0 +1,71 @@
+@include establish-baseline($base-font-size);
+
+body {
+  color: $text-color;
+  font-family: $base-font;
+
+  strong { font-family: $base-bold-font; }
+  strong em { font-family: $base-it-bold-font; }
+
+  em { font-family: $base-it-font; }
+  em strong { font-family: $base-it-bold-font; }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    color: $headings-color;
+  }
+
+  h1 { @include adjust-font-size-to($font-size-h1); }
+  h2 { @include adjust-font-size-to($font-size-h2); }
+  h3 { @include adjust-font-size-to($font-size-h3); }
+  h4 { @include adjust-font-size-to($font-size-h4); }
+  h5 { @include adjust-font-size-to($font-size-h5); }
+  h6 { @include adjust-font-size-to($font-size-h6); }
+
+  a {
+    @include link-colors($link-color, $link-hover-color, $link-active-color, $link-visited-color, $link-focus-color);
+    @include hover-link();
+
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+  }
+
+  button, label {
+    cursor: pointer;
+  }
+}
+
+@mixin stylized-typography {
+  h1 { @include margin-trailer(1, $font-size-h1); }
+  h2 { @include margin-trailer(1, $font-size-h2); }
+  h3 { @include margin-trailer(1, $font-size-h3); }
+  h4 { @include margin-trailer(1, $font-size-h4); }
+  h5 { @include margin-trailer(1, $font-size-h5); }
+  h6 { @include margin-trailer(1, $font-size-h6); }
+
+  ul, ol {
+    list-style-position: inside;
+    @include margin-trailer(1);
+  }
+
+  ul { list-style-type: disc; }
+  ol { list-style-type: decimal; }
+
+  p {
+    @include margin-trailer(1);
+  }
+
+  table {
+    width: 100%;
+    @include margin-trailer(1);
+  }
+
+  table th, table td {
+    @include rhythm-padding(1);
+    @include horizontal-borders(1px, 0.5);
+
+//    border-color: #ddd;
+  }
+}

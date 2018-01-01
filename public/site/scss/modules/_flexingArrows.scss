@@ -1,0 +1,112 @@
+@mixin transform-origin( $value ) {
+  transform-origin: $value;
+}
+
+@mixin arrowTransform( $angle, $x: 0, $y: 0 ) {
+  i:first-child {
+    @include transform( translate( $x, $y ) rotate( $angle ) );
+  }
+
+  i:last-child {
+    @include transform( translate( $x, -$y ) rotate( -$angle ) );
+  }
+}
+
+@mixin flexing-arrows ($options: ()) {
+  $configuration: map-merge((
+    size: 40px,
+    thickness: 5px,
+    angle: 40deg,
+    angleHover: 30deg,
+    angleActive: 25deg
+  ), $options);
+
+  width: map-get($configuration, size);
+  height: map-get($configuration, size);
+  cursor: pointer;
+  @include transform( translate3d(0,0,0) ); // fixes flicker in webkit
+
+  display: inline-block;
+  -webkit-filter: drop-shadow( 0 2px 0px rgba(0,0,0,0.2) );
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  outline: 0;
+
+  i {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: map-get($configuration, size);
+    height: map-get($configuration, thickness);
+    border-radius: map-get($configuration, thickness) / 2;
+    background: #fff;
+
+    @include transition( all 0.15s ease );
+  }
+
+  &.left {
+    i {
+      @include transform-origin( 0% 50% );
+    }
+
+    @include arrowTransform( map-get($configuration, angle), 0, -1px );
+
+    &:hover {
+      @include arrowTransform( map-get($configuration, angleHover), 0, -1px );
+    }
+
+    &:active {
+      @include arrowTransform( map-get($configuration, angleActive), 1px, -1px );
+    }
+
+    &[data-state=disabled],
+    &.slick-disabled {
+      @include arrowTransform( 0deg, -5px, 0 );
+
+      &:hover {
+        @include arrowTransform( 0deg, -5px, 0 );
+      }
+    }
+  }
+
+  &.right {
+    i {
+      @include transform-origin( 100% 50% );
+    }
+
+    @include arrowTransform( map-get($configuration, angle), 0, 1px );
+
+    &:hover {
+      @include arrowTransform( map-get($configuration, angleHover), 0, 1px );
+    }
+
+    &:active {
+      @include arrowTransform( map-get($configuration, angleActive), 1px, 1px );
+    }
+
+    &[data-state=disabled],
+    &.slick-disabled {
+      @include arrowTransform( 0deg, 5px, 0 );
+
+      &:hover {
+        @include arrowTransform( 0deg, 5px, 0 );
+      }
+    }
+  }
+
+  &[data-state=disabled],
+  &.slick-disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .paginate {
+    width: 50px;
+    height: 60px;
+
+    i { left: 5px }
+  }
+}

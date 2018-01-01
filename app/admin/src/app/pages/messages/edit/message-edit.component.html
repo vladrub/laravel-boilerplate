@@ -1,0 +1,5 @@
+<ba-card title="Редактирование пользователя">
+    <form-builder [settings]="formSettings" [(data)]="formData" (formSubmit)="onSubmit()" #formBuilder *ngIf="formData"></form-builder>
+</ba-card>
+
+<!--<pre class="clear-fix">{{ formData | json }}</pre>-->

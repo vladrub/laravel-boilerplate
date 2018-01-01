@@ -1,0 +1,36 @@
+$browser-minimum-versions: (
+    "ie": "9"
+);
+
+$base-font-size: 16px;
+//$base-line-height: 24px;
+$round-to-nearest-half-line: false;
+$rhythm-unit: "em";
+
+// COLORS
+$text-color: #000000 !default;
+
+// LINKS
+$link-color: #000 !default;
+$link-hover-color: #000 !default;
+$link-focus-color: $link-hover-color !default;
+$link-active-color: #000 !default;
+$link-visited-color: #000 !default;
+
+// HEADINGS
+$headings-font-family: 'DINPro-Bold', sans-serif !default;
+$headings-font-weight: 500 !default;
+$headings-color: inherit !default;
+
+$font-size-h1: 40px !default;
+$font-size-h2: 26px !default;
+$font-size-h3: 24px !default;
+$font-size-h4: 18px !default;
+$font-size-h5: 16px !default;
+$font-size-h6: 12px !default;
+
+// FONTS
+$base-font: 'DINPro-Bold', sans-serif;
+$base-bold-font: 'DINPro-Bold', sans-serif;
+$base-it-font: 'DINPro-Bold', sans-serif;
+$base-it-bold-font: 'DINPro-Bold', sans-serif;

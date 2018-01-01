@@ -1,0 +1,114 @@
+@import "susy";
+
+// Responsive Breakpoints
+// ----------
+
+$container-width: 1810px;
+
+$breakpoints: (
+    320: (
+        min-width: 0px,
+        max-width: 320px
+    ),
+
+    480: (
+        min-width: 320px,
+        max-width: 480px
+    ),
+
+    640: (
+        min-width: 480px,
+        max-width: 640px
+    ),
+
+    768: (
+        min-width: 640px,
+        max-width: 768px
+    ),
+
+    800: (
+        min-width: 768px,
+        max-width: 800px
+    ),
+
+    1024: (
+        min-width: 800px,
+        max-width: 1024px
+    ),
+
+    1280: (
+        min-width: 1024px,
+        max-width: 1280px
+    ),
+
+    1366: (
+        min-width: 1280px,
+        max-width: 1366px
+    ),
+
+    1440: (
+        min-width: 1364px,
+        max-width: 1440px
+    ),
+
+    1680: (
+        min-width: 1440px,
+        max-width: 1680px
+    ),
+
+    container: (
+        max-width: $container-width
+    )
+);
+
+
+// Responsive Breakpoints
+// ----------
+// - orientation: landscape ---- горизонтальная
+// - orientation: portrait ---- вертикальная
+
+@mixin breakpoint($breakpoint, $orientation: false) {
+  $settings: parse-breakpoint($breakpoint);
+
+  @if map-has-key($breakpoints, map-get($settings, point)) {
+    $breakpoint: map-get($breakpoints, map-get($settings, point));
+
+    @if not map-has-key($settings, only) {
+      $breakpoint: map-deep-set($breakpoint, min-width, 0px);
+    } @else {
+      @if (map-get($settings, point) == container) {
+        $max: 0px;
+
+        @each $breakpoint, $dim in $breakpoints {
+          $min-width: map-get($dim, min-width);
+          $max-width: map-get($dim, max-width);
+
+          @if ( $min-width != null and $max-width != null ) {
+            @if ($min-width != 0px and $max-width <= $container-width) {
+              $max: $max-width;
+            }
+          }
+        }
+
+
+        $breakpoint: map-merge($breakpoint, (min-width: $max));
+      }
+    }
+
+    @if map-has-key($settings, device) {
+      $breakpoint: map-merge($breakpoint, (max-device-width: map-get($breakpoint, max-width)));
+    }
+
+    @if ($orientation) {
+      $breakpoint: map-merge($breakpoint, (orientation: $orientation));
+    }
+
+    @include susy-media($breakpoint) {
+      @content;
+    };
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}

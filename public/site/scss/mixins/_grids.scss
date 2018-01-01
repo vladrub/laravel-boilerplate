@@ -1,0 +1,44 @@
+@import "susy";
+
+// Susy Grid Config
+// For more information: http://susydocs.oddbird.net/en/latest/settings/
+
+$susy: (
+    columns: 12,
+    container-position: center,
+	output: float,
+	gutter-position: inside,
+
+    // static
+//    container: 1200px,
+//    math: static,
+//    column-width: 65px,
+//    gutters: 20px/65px,
+
+    // fluid
+    container: auto,
+    math: fluid,
+    gutters: 1/4,
+
+	debug: (
+		image: hide,
+		color: rgba(#66f, .5),
+		output: background,
+		toggle: top right,
+	)
+);
+
+
+$mobile:(
+    max-width: 768px
+);
+
+$tablet: (
+    min-width: 768px,
+    max-width: 992px
+);
+
+$desktop: (
+    min-width: 992px,
+    max-width: 1200px
+);
